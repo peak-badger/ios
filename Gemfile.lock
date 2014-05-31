@@ -9,11 +9,14 @@ GEM
     bubble-wrap-http (1.6.0)
     methadone (1.4.0)
       bundler
+    motion-pixatefreestyle (2.1)
+      sass
     motion-require (0.2.0)
     motion-support (0.2.6)
       motion-require (>= 0.0.6)
     navigable_hash (1.3.0)
     rake (10.3.2)
+    sass (3.3.8)
 
 PLATFORMS
   ruby
@@ -21,6 +24,7 @@ PLATFORMS
 DEPENDENCIES
   ProMotion (~> 1.2.0)
   bubble-wrap
+  motion-pixatefreestyle
   motion-support
   navigable_hash
   rake

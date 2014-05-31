@@ -12,4 +12,5 @@ Motion::Project::App.setup do |app|
   app.name = 'PeakBadger'
   app.frameworks += ['CoreLocation']
   app.detect_dependencies = false
+  app.pixatefreestyle.framework = 'vendor/PixateFreestyle.framework'
 end
