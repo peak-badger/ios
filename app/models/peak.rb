@@ -9,12 +9,15 @@ class Peak < Hash
     end
 
     def all
-      return __cache__ unless __cache__.empty?
+      load! if __cache__.empty?
+      __cache__
+    end
+
+    def load!
       Dir.glob(File.join DATA_DIR, '**', '*.geojson').each do |file|
         next if File.basename(file) =~ /^_index/
         from_file(file).save
       end
-      __cache__
     end
 
     def from_file(file)

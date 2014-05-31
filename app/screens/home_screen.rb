@@ -1,28 +1,16 @@
 class HomeScreen < PM::Screen
+  include LocationHelper
+
   title "Peak Badger"
 
   def will_appear
-    margin = 20
-    set_attributes self.view, {
-        styleId: 'main-view'
-    }
-    @checkInButton = UIButton.buttonWithType(UIButtonTypeCustom).tap do |button|
-      button.setTitle "Check In", forState: UIControlStateNormal
-      button.frame = [
-          [margin, view.frame.size.height / 2 - margin],
-          [view.frame.size.width - margin * 2, 40]
-      ]
-      button.styleId = 'check-in-button'
-      button.when(UIControlEventTouchUpInside) do
-        attempt_checkin
-      end
-      self.view.addSubview button
-    end
+    set_attributes self.view, {styleId: 'main-view'}
+    self.view.addSubview check_in_button
   end
 
   def attempt_checkin
-    BW::Location.get_once do |location|
-      get_peak_badge Peak.all.find { |peak| peak.nearby?(location) }
+    fetch_location do |location|
+      get_peak_badge location.peak
     end
   end
 
@@ -35,4 +23,20 @@ class HomeScreen < PM::Screen
     App.alert("You have checked into #{peak.name}")
   end
 
+  private
+
+  def check_in_button
+    @check_in_button ||= UIButton.buttonWithType(UIButtonTypeCustom).tap do |button|
+      margin = 20
+      width = view.frame.size.width - margin * 2
+      height = 40
+      top = view.frame.size.height - height - margin
+      left = margin
+      button.setTitle "Check In", forState: UIControlStateNormal
+      button.frame = [[left, top],[width, height]]
+      button.styleId = 'check-in-button'
+      button.when(UIControlEventTouchUpInside) { attempt_checkin }
+    end
+
+  end
 end

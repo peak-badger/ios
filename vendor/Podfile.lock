@@ -1,0 +1,26 @@
+PODS:
+  - CocoaLumberjack (1.6.5.1):
+    - CocoaLumberjack/Core
+    - CocoaLumberjack/Extensions
+  - CocoaLumberjack/Core (1.6.5.1)
+  - CocoaLumberjack/Extensions (1.6.5.1):
+    - CocoaLumberjack/Core
+  - NSData+MD5Digest (1.0.0)
+  - YapDatabase (2.4.2):
+    - YapDatabase/standard
+  - YapDatabase/common (2.4.2):
+    - CocoaLumberjack (~> 1.6.3)
+  - YapDatabase/standard (2.4.2):
+    - YapDatabase/common
+
+DEPENDENCIES:
+  - CocoaLumberjack (~> 1.6.5)
+  - NSData+MD5Digest (~> 1.0.0)
+  - YapDatabase (~> 2.4)
+
+SPEC CHECKSUMS:
+  CocoaLumberjack: baf4a09a3bcbdfea3363556a90104e026d3504e2
+  NSData+MD5Digest: 3662c71c33c32cac0302dce76df6df7a6d81acca
+  YapDatabase: 269e2799fe19c7a517521783b909d11873dcb0c8
+
+COCOAPODS: 0.33.1
