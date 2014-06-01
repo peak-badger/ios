@@ -11,11 +11,20 @@ module LocationHelper
       end
 
       def update(&block)
+        return raise_location_error unless BW::Location.enabled?
         BW::Location.get_once do |location|
-          tracker = new location
-          self.last = tracker
-          block.call tracker if block_given?
+          unless last.valid? && last.location.distanceFromLocation(location) < 10
+            tracker = new location
+            self.last = tracker
+            block.call tracker if block
+          end
         end
+      end
+
+      private
+
+      def raise_location_error
+        App.alert('You must have location services on to use this app!')
       end
 
     end

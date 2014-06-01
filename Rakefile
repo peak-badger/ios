@@ -60,4 +60,4 @@ namespace :compile do
   end
 end
 
-Rake::Task['simulator'].enhance ['compile:data']
+Rake::Task['simulator'].enhance ['pixatefreestyle:sass', 'compile:data']
