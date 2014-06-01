@@ -10,7 +10,9 @@ module LocationHelper
 
   def fetch_location(&block)
     if Tracker.last.valid?
-      block.call Tracker.last if block_given?
+      EM.schedule_on_main do
+        block.call Tracker.last
+      end if block_given?
     else
       Tracker.update(&block)
     end

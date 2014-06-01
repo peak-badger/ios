@@ -44,7 +44,7 @@ module LocationHelper
     end
 
     def nearest_peak
-      NearestPeak.new(location)
+      @nearest_peak ||= NearestPeak.new(location)
     end
 
     def valid?
