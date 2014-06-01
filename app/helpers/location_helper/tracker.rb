@@ -11,12 +11,14 @@ module LocationHelper
       end
 
       def update(&block)
-        return raise_location_error unless BW::Location.enabled?
-        BW::Location.get_once do |location|
-          unless last.valid? && last.location.distanceFromLocation(location) < 10
-            tracker = new location
-            self.last = tracker
-            block.call tracker if block
+        EM.schedule_on_main do
+          return raise_location_error unless BW::Location.enabled?
+          BW::Location.get_once do |location|
+            unless last.valid? && last.location.distanceFromLocation(location) < 10
+              tracker = new location
+              self.last = tracker
+              block.call tracker if block
+            end
           end
         end
       end
