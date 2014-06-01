@@ -6,5 +6,3 @@ gem 'motion-support'
 gem "bubble-wrap"
 gem "motion-pixatefreestyle"
 gem 'motion_model'
-gem 'motion-cocoapods'
-# gem 'motion-testflight'

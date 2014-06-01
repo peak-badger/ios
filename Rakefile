@@ -19,18 +19,6 @@ Motion::Project::App.setup do |app|
   app.detect_dependencies = false
   app.pixatefreestyle.framework = 'vendor/PixateFreestyle.framework'
   app.interface_orientations = [:portrait]
-
-  # app.testflight.sdk = 'vendor/TestFlight'
-  # app.testflight.api_token = '725c8167626fdb2588e57673d782d2f8_MTg4NTM2NzIwMTQtMDUtMzEgMjA6MDY6MjQuMTcyNjEw'
-  # app.testflight.team_token = '2a61c9c52c1aa18af57c86f94d5df611_Mzg3Njg0MjAxNC0wNS0zMSAyMDowOTozMS41MDY1ODM'
-  # app.testflight.app_token = '26a74803-c63e-40a3-8c72-f0f80eb7ca8a'
-  # app.testflight.distribution_lists = ['badgers']
-  # app.testflight.notify = true # default is false
-  # app.testflight.identify_testers = true # default is false
-
-  app.pods do
-    pod 'NSData+MD5Digest'
-  end
 end
 
 desc 'upload to testflight'
