@@ -1,3 +1,3 @@
-[submodule "resources/data/peaks"]
-	path = resources/data/peaks
+[submodule "data/peaks"]
+	path = data/peaks
 	url = git@github.com:open-peaks/data.git

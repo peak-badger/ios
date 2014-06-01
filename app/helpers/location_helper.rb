@@ -1,41 +1,12 @@
 module LocationHelper
 
-  class Tracker
-
-    DEFAULT_LOCATION = CLLocation.alloc.initWithLatitude(0.0, longitude: 0.0)
-
-    class << self
-      attr_writer :last
-
-      def last
-        @last ||= new(DEFAULT_LOCATION)
+  def poll_for_location
+    proc { Tracker.update }.tap do |block|
+      block.call
+      EM.add_periodic_timer 5.0 do
+        block.call
       end
-
-      def update(&block)
-        BW::Location.get_once do |location|
-          tracker = new location
-          self.last = tracker
-          block.call tracker if block_given?
-        end
-      end
-
     end
-
-    attr_reader :location
-
-    def initialize(location)
-      @location = location
-      @timestamp = Time.now
-    end
-
-    def peak
-      @peak ||= Peak.all.find { |peak| peak.nearby?(@location) }
-    end
-
-    def valid?
-      @location != DEFAULT_LOCATION && @timestamp > 10.minutes.ago
-    end
-
   end
 
   def fetch_location(&block)

@@ -3,8 +3,8 @@ class AppDelegate < PM::Delegate
 
   def on_load(app, options)
     extend LocationHelper
-    Peak.load!
-    fetch_location
+    Peak.load
+    poll_for_location
     open HomeScreen.new(nav_bar: true)
   end
   

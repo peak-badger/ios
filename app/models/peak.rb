@@ -1,6 +1,6 @@
 class Peak < Hash
 
-  DATA_DIR = File.join(App.resources_path, 'data')
+  DATA_FILE = File.join(App.resources_path, 'data', 'peaks.json')
 
   class << self
 
@@ -9,23 +9,14 @@ class Peak < Hash
     end
 
     def all
-      load! if __cache__.empty?
-      __cache__
-    end
-
-    def load!
-      Dir.glob(File.join DATA_DIR, '**', '*.geojson').each do |file|
-        next if File.basename(file) =~ /^_index/
-        from_file(file).save
+      @all ||= load_json.each_with_object([]) do |raw_peak, ary|
+        instance = new raw_peak
+        ary << instance if instance.latitude && instance.longitude
       end
     end
 
-    def from_file(file)
-      from_json File.read file
-    end
-
-    def from_json(string)
-      new BW::JSON.parse string
+    def load_json
+      BW::JSON.parse(File.read DATA_FILE)
     end
 
     def property(name)
@@ -52,13 +43,17 @@ class Peak < Hash
   end
 
   property :name
-  property :feet
+  property :meters
 
   property :latitude
   alias :lat :latitude
 
   property :longitude
   alias :lng :longitude
+
+  def feet
+    meters.in(:meters).to(:feet)
+  end
 
   def latlng
     [lat, lng]
