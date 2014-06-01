@@ -1,11 +1,5 @@
 class MotivationScreen < BackgroundScreen
 
-  MOTIVATIONAL_TEXTS = [
-      'Get off your butt lazy!',
-      'Don\'t you have some pounds to work off?',
-      'No wonder you\'re still single!'
-  ]
-
   self.image = 'off-peak.png'
 
   def will_appear
@@ -18,8 +12,14 @@ class MotivationScreen < BackgroundScreen
 
   private
 
+  def motivations
+    @motivations ||= File.read(File.join App.resources_path, 'motivation.txt').lines.to_a.map do |quote|
+      quote.split('–').map(&:strip).join("\n\n")
+    end
+  end
+
   def change_motivational_text
-    text.text = MOTIVATIONAL_TEXTS.sample
+    text.text = motivations.sample
   end
 
   def text
@@ -27,7 +27,7 @@ class MotivationScreen < BackgroundScreen
       margin = 20
       width = view.frame.size.width - margin * 2
       height = view.frame.size.height
-      top = view.frame.size.height / 3
+      top = 0
       left = margin
       text.numberOfLines = 0
       text.lineBreakMode = NSLineBreakByWordWrapping
