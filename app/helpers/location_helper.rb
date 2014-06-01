@@ -16,4 +16,8 @@ module LocationHelper
     end
   end
 
+  def last_location
+    Tracker.last
+  end
+
 end

@@ -1,32 +1,54 @@
 class MotivationScreen < BackgroundScreen
+  include LocationHelper
 
   self.image = 'off-peak.png'
+
+  def nearest_peak
+    last_location.nearest_peak
+  end
 
   def will_appear
     set_attributes self.view, {styleId: 'motivation-screen'}
     self.view.addSubview background_image
-    self.view.addSubview text
+    self.view.addSubview motivational_text
+    self.view.addSubview nearest_peak_text
     self.view.addSubview motivate_button
     change_motivational_text
+    nearest_peak_text.text = "Get hiking!\n#{nearest_peak.name} is only #{nearest_peak.distance_with_units} away"
   end
 
   private
 
   def motivations
     @motivations ||= File.read(File.join App.resources_path, 'motivation.txt').lines.to_a.map do |quote|
-      quote.split('–').map(&:strip).join("\n\n")
+      quote.split('–').map(&:strip).join("\n\n").strip
     end
   end
 
   def change_motivational_text
-    text.text = motivations.sample
+    motivational_text.text = motivations.sample
+    motivational_text.sizeToFit
   end
 
-  def text
-    @text ||= UILabel.new.tap do |text|
+  def nearest_peak_text
+    @nearest_peak_text ||= UILabel.new.tap do |text|
       margin = 20
       width = view.frame.size.width - margin * 2
-      height = view.frame.size.height
+      height = 0
+      top = 0
+      left = margin
+      text.numberOfLines = 0
+      text.lineBreakMode = NSLineBreakByWordWrapping
+      text.styleClass = 'nearest-peak'
+      text.frame = [[left, top], [width, height]]
+    end
+  end
+
+  def motivational_text
+    @motivational_text ||= UILabel.new.tap do |text|
+      margin = 20
+      width = view.frame.size.width - margin * 2
+      height = 0
       top = 0
       left = margin
       text.numberOfLines = 0

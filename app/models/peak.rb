@@ -68,7 +68,7 @@ class Peak < Hash
   end
 
   def get_distance(loc)
-    get_distance(loc, inUnits: :miles)
+    get_distance(loc, inUnits: :meters)
   end
 
   def get_distance(loc, inUnits: unit)
@@ -76,7 +76,7 @@ class Peak < Hash
   end
 
   def nearby?(location, distance = 0.25)
-    get_distance(location) < distance
+    get_distance(location, inUnits: :miles) < distance
   end
 
 end

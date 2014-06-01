@@ -5,7 +5,7 @@ class CheckInScreen < BackgroundScreen
   title "Peak Badger"
 
   def will_appear
-    set_attributes self.view, {styleId: 'check-in-screen'}
+    set_attributes self.view, { styleId: 'check-in-screen'}
     self.view.addSubview background_image
     self.view.addSubview check_in_button
     self.view.addSubview text
@@ -55,7 +55,7 @@ class CheckInScreen < BackgroundScreen
       text.lineBreakMode = NSLineBreakByWordWrapping
       text.styleClass = 'peak-name'
       text.frame = [[left, top], [width, height]]
-      text.text = LocationHelper::Tracker.last.peak.name
+      text.text = last_location.peak.name
     end
   end
 

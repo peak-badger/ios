@@ -41,6 +41,10 @@ module LocationHelper
       @peak ||= Peak.all.find { |peak| peak.nearby?(@location) } || Peak.allocate
     end
 
+    def nearest_peak
+      NearestPeak.new(location)
+    end
+
     def valid?
       @location != DEFAULT_LOCATION && @timestamp > 10.minutes.ago
     end
