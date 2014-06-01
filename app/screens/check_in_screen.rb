@@ -38,7 +38,7 @@ class CheckInScreen < BackgroundScreen
       left = margin
       text.numberOfLines = 0
       text.lineBreakMode = NSLineBreakByWordWrapping
-      text.styleClass = 'info'
+      text.styleClass = 'info-text'
       text.frame = [[left, top], [width, height]]
       text.text = "Great job, it looks like you reached the top of"
     end
@@ -53,7 +53,7 @@ class CheckInScreen < BackgroundScreen
       left = margin
       text.numberOfLines = 0
       text.lineBreakMode = NSLineBreakByWordWrapping
-      text.styleClass = 'peak-name'
+      text.styleClass = 'peak-name-text'
       text.frame = [[left, top], [width, height]]
       text.text = last_location.peak.name
     end

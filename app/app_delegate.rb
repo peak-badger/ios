@@ -4,6 +4,7 @@ class AppDelegate < PM::Delegate
   def on_load(app, options)
     extend LocationHelper
     Peak.load
+    open NullScreen.new
     will_enter_foreground
     poll_for_location { |l| location_handler l }
   end

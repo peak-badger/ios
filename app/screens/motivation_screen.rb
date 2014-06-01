@@ -27,7 +27,12 @@ class MotivationScreen < BackgroundScreen
 
   def change_motivational_text
     motivational_text.text = motivations.sample
+    margin = 20
+    width = view.frame.size.width - margin * 2
+    top = 0
+    left = margin
     motivational_text.sizeToFit
+    motivational_text.frame = [[left, top], [width, motivational_text.frame.size.height]]
   end
 
   def nearest_peak_text
@@ -39,22 +44,16 @@ class MotivationScreen < BackgroundScreen
       left = margin
       text.numberOfLines = 0
       text.lineBreakMode = NSLineBreakByWordWrapping
-      text.styleClass = 'nearest-peak'
+      text.styleClass = 'nearest-peak-text'
       text.frame = [[left, top], [width, height]]
     end
   end
 
   def motivational_text
     @motivational_text ||= UILabel.new.tap do |text|
-      margin = 20
-      width = view.frame.size.width - margin * 2
-      height = 0
-      top = 0
-      left = margin
       text.numberOfLines = 0
       text.lineBreakMode = NSLineBreakByWordWrapping
-      text.styleClass = 'motivator'
-      text.frame = [[left, top], [width, height]]
+      text.styleClass = 'motivational-text'
     end
   end
 
