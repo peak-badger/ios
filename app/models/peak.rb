@@ -11,7 +11,7 @@ class Peak < Hash
     def all
       @all ||= load_json.each_with_object([]) do |raw_peak, ary|
         instance = new raw_peak
-        ary << instance if instance.latitude && instance.longitude
+        ary << instance if instance.valid?
       end
     end
 
@@ -57,6 +57,10 @@ class Peak < Hash
 
   def latlng
     [lat, lng]
+  end
+
+  def valid?
+    latitude && longitude
   end
 
   def location

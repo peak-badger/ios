@@ -1,11 +1,10 @@
 module LocationHelper
 
   def poll_for_location
-    proc { Tracker.update }.tap do |block|
+    block = proc { Tracker.update }
+    block.call
+    EM.add_periodic_timer 5.0 do
       block.call
-      EM.add_periodic_timer 5.0 do
-        block.call
-      end
     end
   end
 

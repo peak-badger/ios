@@ -19,7 +19,7 @@ class HomeScreen < PM::Screen
   end
 
   def get_peak_badge(peak)
-    return show_invalid_peak! if peak.nil?
+    return show_invalid_peak! unless peak.valid?
     App.alert("You have checked into #{peak.name}")
   end
 

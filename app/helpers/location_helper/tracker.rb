@@ -13,7 +13,6 @@ module LocationHelper
       def update(&block)
         BW::Location.get_once do |location|
           tracker = new location
-          puts 'got location'
           self.last = tracker
           block.call tracker if block_given?
         end

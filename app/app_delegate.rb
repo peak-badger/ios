@@ -7,5 +7,9 @@ class AppDelegate < PM::Delegate
     poll_for_location
     open HomeScreen.new(nav_bar: true)
   end
+
+  def will_enter_foreground
+    fetch_location
+  end
   
 end
