@@ -5,5 +5,6 @@ gem "ProMotion", "~> 1.2.0"
 gem 'motion-support'
 gem "bubble-wrap"
 gem "motion-pixatefreestyle"
-gem 'motion-yapper'
+gem 'motion_model'
 gem 'motion-cocoapods'
+# gem 'motion-testflight'

@@ -80,8 +80,4 @@ class Peak < Hash
     get_distance(location) < distance
   end
 
-  # all.find { |peak| peak.nearby location }
-
-  private
-
 end
