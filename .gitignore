@@ -6,6 +6,7 @@ resources/*.nib
 resources/*.momd
 resources/*.storyboardc
 vendor/Pods
+vendor/PixateFreestyle.framework/build-*
 .DS_Store
 nbproject
 .redcar
